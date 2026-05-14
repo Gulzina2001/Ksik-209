@@ -1,0 +1,67 @@
+// ====== НАСТРОЙКИ ======
+const orbit = document.querySelector(".orbit");
+const moon = document.querySelector(".moon");
+
+let angle = 0;
+let moonAngle = 0;
+
+const speed = {
+  planet: 0.3,   // скорость вращения орбиты
+  moon: 0.06     // скорость луны
+};
+
+// ====== СОЗДАНИЕ ЗВЁЗД ======
+function createStars(count = 120) {
+  const space = document.querySelector(".space");
+
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement("div");
+
+    star.style.position = "absolute";
+    star.style.width = "2px";
+    star.style.height = "2px";
+    star.style.background = "white";
+    star.style.borderRadius = "50%";
+    star.style.opacity = Math.random();
+
+    star.style.left = Math.random() * window.innerWidth + "px";
+    star.style.top = Math.random() * window.innerHeight + "px";
+
+    space.appendChild(star);
+  }
+}
+
+// ====== АНИМАЦИЯ ======
+function animate() {
+  // вращение орбиты
+  angle += speed.planet;
+  orbit.style.transform = `rotate(${angle}deg)`;
+
+  // движение луны по окружности (внутри орбиты)
+  moonAngle += speed.moon;
+
+  const radius = 90;
+  const centerX = 150;
+  const centerY = 150;
+
+  const x = centerX + Math.cos(moonAngle) * radius;
+  const y = centerY + Math.sin(moonAngle) * radius;
+
+  moon.style.left = x + "px";
+  moon.style.top = y + "px";
+
+  requestAnimationFrame(animate);
+}
+
+// ====== УПРАВЛЕНИЕ СКОРОСТЬЮ ======
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowUp") speed.planet += 0.1;
+  if (e.key === "ArrowDown") speed.planet = Math.max(0.1, speed.planet - 0.1);
+
+  if (e.key === "ArrowRight") speed.moon += 0.01;
+  if (e.key === "ArrowLeft") speed.moon = Math.max(0.01, speed.moon - 0.01);
+});
+
+// ====== ЗАПУСК ======
+createStars();
+animate();

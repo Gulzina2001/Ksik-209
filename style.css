@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  background: radial-gradient(circle at center, #0b0f2a, #000);
+  overflow: hidden;
+}
+
+.space {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* орбита */
+.orbit {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  animation: rotate 10s linear infinite;
+}
+
+/* планета */
+.planet {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at 30% 30%, #4fc3f7, #1b5e20);
+  border-radius: 50%;
+  top: 100px;
+  left: 100px;
+  box-shadow: 0 0 30px rgba(79,195,247,0.5);
+}
+
+/* луна */
+.moon {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #ccc;
+  border-radius: 50%;
+  top: 50px;
+  left: 140px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+/* вращение */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
